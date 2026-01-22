@@ -1,0 +1,255 @@
+:root {
+  /* Paper + ink */
+  --bg: #c6bd9f;            /* sand / topo paper */
+  --panel: rgba(255, 255, 255, 0.85);
+  --text: #1f2933;          /* near-black ink */
+  --muted: #5f6b73;
+  --accent: rgb(102, 156, 54);        /* muted trail green */
+  --border: #d2ccbd;
+
+  /* Contour lines */
+  --contour: rgba(60, 72, 80, 0.08);
+  --contour-strong: rgba(60, 72, 80, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+
+  /* Topographic paper background */
+  background-color: var(--bg);
+  background-image:
+    repeating-radial-gradient(
+      circle at 25% 30%,
+      var(--contour) 0px,
+      var(--contour) 1px,
+      transparent 1px,
+      transparent 26px
+    ),
+    repeating-radial-gradient(
+      circle at 70% 65%,
+      var(--contour-strong) 0px,
+      var(--contour-strong) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(180, 167, 126, 0.85);
+  backdrop-filter: blur(8px);
+  overflow: hidden;     /* Ensures no scrollbars if image is slightly taller */
+}
+
+.page-header {
+  display: block;       /* Remove any inline spacing */
+  width: 100vw;         /* Full width of viewport */
+  height: auto;         /* Maintain aspect ratio */
+  max-height: 240px;    /* Optional: cap the height for a “thin” look */
+  object-fit: cover;    /* Makes sure it fills width nicely */
+}
+
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+}
+
+.nav-title {
+  color: rgb(102, 156, 54);
+  vertical-align: middle
+}
+
+/* ---------- Index layout ---------- */
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 5rem;
+}
+
+.lead {
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Docs layout ---------- */
+
+.docs-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.5rem;
+}
+
+.docs-toc {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+  border-left: 2px solid var(--border);
+  padding-left: 1rem;
+}
+
+.docs-toc a {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.docs-toc a:hover {
+  color: var(--text);
+}
+
+.docs-content {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2rem 2.5rem;
+}
+
+.docs-content h1 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.docs-content h2 {
+  margin-top: 3rem;
+  font-size: 1.4rem;
+}
+
+.docs-content p {
+  max-width: 760px;
+  color: var(--muted);
+}
+
+.docs-image {
+  width: 240px;
+  max-width: 100%;
+  display: block;
+  margin: 1.5rem 0;
+  border-radius: 10px;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+  transform-origin: left center;
+}
+
+.docs-image:active{
+    transform:scale(2);
+}
+
+code {
+  background: #f4f2ec;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .docs-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .docs-toc {
+    position: static;
+    margin-bottom: 2rem;
+  }
+
+  .docs-content {
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;          /* controls space between image and text */
+  line-height: 1;
+
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+
+  background-color: rgb(102, 156, 54);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+.button img {
+  width: 120px;          /* larger badge */
+  height: auto;
+  display: block;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+
+  max-width: 500px;   /* pick a width that feels right */
+  margin: 0 auto;     /* centers the grid */
+}
+
+figure {
+  margin: 0;
+  text-align: center;
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #555;
+}
