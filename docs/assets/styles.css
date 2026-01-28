@@ -169,8 +169,9 @@ main {
   transform-origin: left center;
 }
 
-.docs-image:active{
-    transform:scale(2);
+.docs-image.is-zoomed {
+  transform: scale(2);
+  cursor: zoom-out;
 }
 
 code {
