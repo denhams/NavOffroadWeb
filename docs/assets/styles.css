@@ -229,6 +229,7 @@ footer {
   color: white;
   text-decoration: none;
   font-weight: 600;
+  width: 210px !important;
 
   transition: background-color 0.15s ease, transform 0.05s ease;
 }
@@ -241,6 +242,45 @@ footer {
 
 .button:active {
   transform: translateY(1px);
+}
+
+.bmc-btn-container {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.bmc-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 0.8rem 1.9rem !important;
+  border-radius: 10px !important;
+
+  background-color: #669c36 !important;
+  color: white !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.15s ease, transform 0.05s ease, box-shadow 0.15s ease;
+  height: 56px !important;
+}
+
+.bmc-btn span.bmc-btn-text {
+  margin-left: 0.25rem;
+}
+
+.bmc-btn:hover {
+  background-color: #558535 !important;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.bmc-btn:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .video-grid {
