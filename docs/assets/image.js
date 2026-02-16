@@ -1,7 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.docs-image').forEach(img => {
-    img.addEventListener('click', () => {
-      img.classList.toggle('is-zoomed');
+  const imgs = document.querySelectorAll('.docs-image, .image-row img');
+
+  imgs.forEach(img => {
+    img.addEventListener('click', e => {
+      e.stopPropagation();
+
+      const zoomed = img.classList.contains('is-zoomed');
+
+      imgs.forEach(i => i.classList.remove('is-zoomed'));
+
+      if (!zoomed) img.classList.add('is-zoomed');
     });
+  });
+
+  document.addEventListener('click', () => {
+    imgs.forEach(i => i.classList.remove('is-zoomed'));
   });
 });

@@ -163,20 +163,32 @@ main {
   color: var(--muted);
 }
 
-.docs-image {
-  width: 240px;
+/* Shared thumbnail behavior */
+.docs-image,
+.image-row img {
+  --origin: left center;
   max-width: 100%;
-  display: block;
-  margin: 1.5rem 0;
-  border-radius: 10px;
+  height: auto;
   cursor: zoom-in;
-  transition: transform 0.2s ease;
-  transform-origin: left center;
+  transition: transform 0.25s ease;
+  transform-origin: var(--origin);
+  position: relative;
+  z-index: 1;
 }
 
+/* 📱 Smaller screenshots — zoom more */
 .docs-image.is-zoomed {
   transform: scale(2);
   cursor: zoom-out;
+  z-index: 1000;
+}
+
+/* 🖥️ Larger device mockups — zoom less */
+.image-row img.is-zoomed {
+  --zoom: 4.0;
+  transform: scale(var(--zoom));
+  cursor: zoom-out;
+  z-index: 1000;
 }
 
 code {
@@ -215,6 +227,11 @@ footer {
   .video-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .mac-image.is-zoomed {
+    --origin: center; /* overrides left alignment */
+  }
+
 }
 
 .button {
