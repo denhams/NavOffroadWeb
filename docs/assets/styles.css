@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light dark;
   /* Paper + ink */
   --bg: #c6bd9f;            /* sand / topo paper */
   --panel: rgba(255, 255, 255, 0.85);
@@ -232,6 +233,25 @@ footer {
     --origin: center; /* overrides left alignment */
   }
 
+}
+
+@media (prefers-color-scheme:dark) {
+  body {
+    /* optional: topo map background tweaks for dark mode */
+    /* background-color: #222; */ /* if you want topo background darkened */
+  }
+
+  .docs-content,
+  .card {
+    background: #1a1a1a;   /* or a dark translucent panel */
+    border-color: #444;     /* darker border for contrast */
+    color: #eee;            /* readable text */
+  }
+
+  .docs-content p,
+  .card p {
+    color: #ccc;               /* slightly softer for readability */
+  }
 }
 
 .button {
