@@ -184,6 +184,11 @@ main {
   z-index: 1000;
 }
 
+.docs-toc .docs-image {
+  max-width: 180px;
+  width: 100%;
+}
+
 /* 🖥️ Larger device mockups — zoom less */
 .image-row img.is-zoomed {
   --zoom: 4.0;
@@ -355,6 +360,12 @@ footer {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+video:fullscreen {
+  object-fit: contain;
+  width: 100vw;
+  height: 100vh;
 }
 
 figure {
