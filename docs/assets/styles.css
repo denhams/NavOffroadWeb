@@ -195,7 +195,7 @@ main {
   transition: transform 0.25s ease;
   transform-origin: var(--origin);
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 /* 📱 Smaller screenshots — zoom more */
