@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const imgs = document.querySelectorAll('.docs-image, .image-row img');
+  const imgs = document.querySelectorAll('.docs-image, .image-row img, .figure-row img');
 
   imgs.forEach(img => {
     img.addEventListener('click', e => {

@@ -1,7 +1,7 @@
 :root {
   color-scheme: light dark;
   /* Paper + ink */
-  --bg: #c6bd9f;            /* sand / topo paper */
+  --bg: #f5f3f0;            /* sand / topo paper */
   --panel: rgba(255, 255, 255, 0.85);
   --text: #1f2933;          /* near-black ink */
   --muted: #5f6b73;
@@ -59,6 +59,19 @@ header {
   overflow: hidden;     /* Ensures no scrollbars if image is slightly taller */
 }
 
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 2%;
+  background-color: #f5ecdd;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  max-height: 70px;
+  z-index: 1000;
+}
+
 .page-header {
   display: block;       /* Remove any inline spacing */
   width: 100vw;         /* Full width of viewport */
@@ -77,6 +90,7 @@ header {
 .nav-title {
   color: rgb(102, 156, 54);
   vertical-align: middle
+  margin: 0px;
 }
 
 /* ---------- Index layout ---------- */
@@ -89,7 +103,8 @@ main {
 
 .lead {
   color: var(--muted);
-  max-width: 720px;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .grid {
@@ -109,7 +124,7 @@ main {
 
 .card p {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 1.0rem;
 }
 
 /* ---------- Docs layout ---------- */
@@ -133,7 +148,7 @@ main {
 
 .docs-toc a {
   display: block;
-  font-size: 0.9rem;
+  font-size: 1.0rem;
   color: var(--muted);
   margin-bottom: 0.6rem;
 }
@@ -162,10 +177,16 @@ main {
 .docs-content p {
   max-width: 760px;
   color: var(--muted);
+  font-size: 1.0rem;
 }
 
 /* Shared thumbnail behavior */
+.image-row {
+  margin-top: 2rem;
+}
+
 .docs-image,
+.figure-row img,
 .image-row img {
   --origin: left center;
   max-width: 100%;
@@ -174,7 +195,7 @@ main {
   transition: transform 0.25s ease;
   transform-origin: var(--origin);
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 /* 📱 Smaller screenshots — zoom more */
@@ -185,12 +206,18 @@ main {
 }
 
 .docs-toc .docs-image {
-  max-width: 180px;
-  width: 100%;
+  max-width: 70%;
 }
 
 /* 🖥️ Larger device mockups — zoom less */
 .image-row img.is-zoomed {
+  --zoom: 4.0;
+  transform: scale(var(--zoom));
+  cursor: zoom-out;
+  z-index: 1000;
+}
+
+.figure-row img.is-zoomed {
   --zoom: 4.0;
   transform: scale(var(--zoom));
   cursor: zoom-out;
@@ -212,11 +239,16 @@ footer {
   text-align: center;
   font-size: 0.85rem;
   color: var(--muted);
+  background-color: #f5ecdd;
 }
 
 /* ---------- Responsive ---------- */
 
 @media (max-width: 900px) {
+  .nav-title{
+    font-size: larger;
+  }
+
   .docs-layout {
     grid-template-columns: 1fr;
   }
@@ -260,19 +292,20 @@ footer {
 }
 
 .button {
-  display: inline-flex;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
-  gap: 0.75rem;          /* controls space between image and text */
+  gap: 0.30rem;          /* controls space between image and text */
   line-height: 1;
 
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.4rem;
   border-radius: 8px;
 
   background-color: rgb(102, 156, 54);
   color: white;
   text-decoration: none;
   font-weight: 600;
-  width: 210px !important;
+  max-width: 180px;
 
   transition: background-color 0.15s ease, transform 0.05s ease;
 }
@@ -368,9 +401,18 @@ video:fullscreen {
   height: 100vh;
 }
 
-figure {
-  margin: 0;
-  text-align: center;
+.figure-row {
+  display: flex;          /* Activates Flexbox layout */
+  flex-direction: row;    /* Aligns items horizontally */
+  gap: 20px;              /* Adds physical space between items */
+  justify-content: center;/* Centers the row items on the page */
+  margin-top: 2rem;
+}
+
+/* 2. Styling the individual figure cards */
+.figure-row figure {
+  margin: 0;              /* Removes browser default figure margins */
+  text-align: center;     /* Centers the text caption under the image */
 }
 
 figcaption {
