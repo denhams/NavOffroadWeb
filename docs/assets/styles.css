@@ -1,7 +1,7 @@
 :root {
   color-scheme: light dark;
   /* Paper + ink */
-  --bg: #c6bd9f;            /* sand / topo paper */
+  --bg: #f5f3f0;            /* sand / topo paper */
   --panel: rgba(255, 255, 255, 0.85);
   --text: #1f2933;          /* near-black ink */
   --muted: #5f6b73;
@@ -29,7 +29,7 @@ body {
   line-height: 1.6;
 
   /* Topographic paper background */
-  background-color: #f5f3f0;
+  background-color: var(--bg);
   background-image:
     repeating-radial-gradient(
       circle at 25% 30%,
