@@ -9,7 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       imgs.forEach(i => i.classList.remove('is-zoomed'));
 
-      if (!zoomed) img.classList.add('is-zoomed');
+      if (!zoomed) {
+        img.classList.add('is-zoomed');
+        if (img.style.zIndex == '30')
+          img.style.zIndex = '60';
+      } else {
+        if (img.style.zIndex == '60')
+          img.style.zIndex = '30';
+      }
     });
   });
 
