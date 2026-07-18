@@ -230,16 +230,37 @@ main {
 /* 🖥️ Larger device mockups — zoom less */
 .image-row img.is-zoomed {
   --zoom: 4.0;
-  transform: scale(var(--zoom));
+  --zoom-boost: 1;
+  transform: scale(calc(var(--zoom) * var(--zoom-boost)));
   cursor: zoom-out;
   z-index: 1000;
 }
 
 .figure-row img.is-zoomed {
   --zoom: 4.0;
-  transform: scale(var(--zoom));
+  --zoom-boost: 1;
+  transform: scale(calc(var(--zoom) * var(--zoom-boost)));
   cursor: zoom-out;
   z-index: 1000;
+}
+
+/* Last image grows leftward instead of rightward when zoomed,
+   so it doesn't zoom off the right edge of the display */
+.figure-row figure:last-child img {
+  --origin: right center;
+}
+
+/* Second-to-last image grows from its own center, staying put either direction */
+.figure-row figure:nth-last-child(2) img {
+  --origin: center;
+}
+
+/* 📱 Narrow screens — zoom these further, on top of whatever --zoom each image already has */
+@media (max-width: 768px) {
+  .image-row img.is-zoomed,
+  .figure-row img.is-zoomed {
+    --zoom-boost: 2.0;
+  }
 }
 
 code {
