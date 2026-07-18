@@ -189,20 +189,38 @@ main {
 .figure-row img,
 .image-row img {
   --origin: left center;
-  max-width: 100%;
+  min-width: 0;
+  width: 100%;
   height: auto;
   cursor: zoom-in;
   transition: transform 0.25s ease;
   transform-origin: var(--origin);
   position: relative;
   z-index: 10;
+  object-fit: cover;
 }
 
 /* 📱 Smaller screenshots — zoom more */
 .docs-image.is-zoomed {
-  transform: scale(2);
+  --zoom: 2;
+  --zoom-max: 2;
+  transform: scale(min(var(--zoom), var(--zoom-max)));
   cursor: zoom-out;
   z-index: 1000;
+}
+
+/* 📱 Narrow devices (phones, iPad Mini portrait) — hard cap zoom, even if --zoom is set inline on the <img> */
+@media (max-width: 768px) {
+  .docs-image.is-zoomed {
+    --zoom-max: 1.5;
+  }
+}
+
+/* 🖥️ On larger screens, zoom these images in a bit further (kept modest since they're portrait) */
+@media (min-width: 900px) {
+  .docs-image.is-zoomed {
+    --zoom-max: 4.0;
+  }
 }
 
 .docs-toc .docs-image {
@@ -264,10 +282,6 @@ footer {
 
   .video-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .mac-image.is-zoomed {
-    --origin: center; /* overrides left alignment */
   }
 
 }
@@ -403,8 +417,9 @@ video:fullscreen {
 
 .figure-row {
   display: flex;          /* Activates Flexbox layout */
+  align-items: flex-start;
   flex-direction: row;    /* Aligns items horizontally */
-  gap: 20px;              /* Adds physical space between items */
+  gap: 10px;              /* Adds physical space between items */
   justify-content: center;/* Centers the row items on the page */
   margin-top: 2rem;
 }
@@ -424,4 +439,20 @@ figcaption {
   margin-top: 0.5rem;
   font-size: 0.85rem;
   color: #555;
+}
+
+.small  { width: 50% !important; }
+.medium-small { width: 60% !important; }
+.medium { width: 80% !important; }
+.large  { width: 100% !important; }
+
+@media (max-width: 768px) {
+    .image-row {
+        gap: 15px;
+    }
+
+    .small  { width: 20%; }
+    .medium-small { width: 22%; }
+    .medium { width: 23%; }
+    .large  { width: 27%; }
 }
