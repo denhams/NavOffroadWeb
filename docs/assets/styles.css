@@ -408,6 +408,12 @@ footer {
 .video-tile {
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.video-tile.is-playing {
+  z-index: 1000;
 }
 
 .video-tile video {
@@ -417,10 +423,28 @@ footer {
   border-radius: 8px;
 }
 
+/* While playing, the frame leaves normal flow so growing it doesn't push
+   sibling tiles around — it just overlays on top, anchored to the same
+   corner it started in. Width/height are set directly by JS (video.js),
+   not by aspect-ratio, to avoid relying on that property inside a grid. */
+.video-tile.is-playing .video-frame {
+  position: absolute;
+  top: 0;
+}
+
+.video-tile:nth-child(odd).is-playing .video-frame {
+  left: 0;
+}
+
+.video-tile:nth-child(even).is-playing .video-frame {
+  right: 0;
+}
+
 .video-frame {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 8px;
+  transition: width 0.25s ease, height 0.25s ease;
 }
 
 .video-frame video {
@@ -445,7 +469,7 @@ video:fullscreen {
   margin-top: 2rem;
 }
 
-/* 2. Styling the individual figure cards */
+/* Styling the individual figure cards */
 .figure-row figure {
   margin: 0;              /* Removes browser default figure margins */
   text-align: center;     /* Centers the text caption under the image */
