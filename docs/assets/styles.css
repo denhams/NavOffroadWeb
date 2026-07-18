@@ -200,6 +200,22 @@ main {
   object-fit: cover;
 }
 
+.docs-image-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.docs-image-row .docs-image {
+  flex: 1 1 0;
+  width: 0;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  transform-origin: left top;   /* anchor growth to top-left corner */
+  transition: transform 0.2s ease;
+}
+
 /* 📱 Smaller screenshots — zoom more */
 .docs-image.is-zoomed {
   --zoom: 2;
