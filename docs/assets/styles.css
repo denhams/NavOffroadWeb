@@ -216,6 +216,10 @@ main {
   transition: transform 0.2s ease;
 }
 
+.docs-image-row .docs-image:last-child {
+  transform-origin: right top;
+}
+
 /* 📱 Smaller screenshots — zoom more */
 .docs-image.is-zoomed {
   --zoom: 2;
