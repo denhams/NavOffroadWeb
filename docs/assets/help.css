@@ -1,0 +1,76 @@
+
+    /* unvisited link */
+    a:link {
+      color: blue;
+      text-decoration: none;
+    }
+
+    /* visited link */
+    a:visited {
+      color: blue;
+      text-decoration: none;
+    }
+
+    /* mouse over link */
+    a:hover {
+      color: blue;
+      text-decoration: none;
+    }
+
+    /* selected link */
+    a:active {
+      color: blue;
+      text-decoration: none;
+    }
+
+    body
+    {
+       font-family: Arial;
+	   color: var(--text);
+	   background-color: var(--bg);
+	   background-image:
+	     repeating-radial-gradient(
+	       circle at 25% 30%,
+	       var(--contour) 0px,
+	       var(--contour) 1px,
+	       transparent 1px,
+	       transparent 26px
+	     ),
+	     repeating-radial-gradient(
+	       circle at 70% 65%,
+	       var(--contour-strong) 0px,
+	       var(--contour-strong) 1px,
+	       transparent 1px,
+	       transparent 40px
+	     );
+    }
+
+    :root {
+      color-scheme: light dark;
+	  /* Paper + ink */
+	  --bg: #f5f3f0;            /* sand / topo paper */
+	  --panel: rgba(255, 255, 255, 0.85);
+	  --text: #1f2933;          /* near-black ink */
+	  --muted: #5f6b73;
+	  --accent: rgb(102, 156, 54);        /* muted trail green */
+	  --border: #d2ccbd;
+
+	  /* Contour lines */
+	  --contour: rgba(60, 72, 80, 0.08);
+	  --contour-strong: rgba(60, 72, 80, 0.12);
+    }
+
+    @media (prefers-color-scheme:dark) {
+    }
+
+	/* no horizontal scroll */
+	html, body {
+	  max-width: 100%;
+	  overflow-x: hidden;
+	}
+
+	.no-contours body {
+	  background-color: initial;
+	  background-image: none;
+	  color: CanvasText;
+	}
