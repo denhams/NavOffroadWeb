@@ -13,10 +13,6 @@
   --contour-strong: rgba(60, 72, 80, 0.12);
 }
 
-* {
-  box-sizing: border-box;
-}
-
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -27,6 +23,11 @@ body {
                Roboto, Helvetica, Arial, sans-serif;
   color: var(--text);
   line-height: 1.6;
+
+  /* Sticky footer layout */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   /* Topographic paper background */
   background-color: var(--bg);
@@ -89,7 +90,7 @@ header {
 
 .nav-title {
   color: rgb(102, 156, 54);
-  vertical-align: middle
+  vertical-align: middle; /* FIXED: Added missing semicolon */
   margin: 0px;
 }
 
@@ -129,6 +130,10 @@ main {
 
 /* ---------- Docs layout ---------- */
 
+.docs-layout, main {
+  flex: 1;
+}
+
 .docs-layout {
   max-width: 1200px;
   margin: 0 auto;
@@ -144,6 +149,8 @@ main {
   align-self: start;
   border-left: 2px solid var(--border);
   padding-left: 1rem;
+  max-width: 100%;       /* Keeps all children strictly contained */
+  box-sizing: border-box;
 }
 
 .docs-toc a {
@@ -185,102 +192,34 @@ main {
   margin-top: 2rem;
 }
 
+/* Flexible images for both portrait and landscape */
 .docs-image,
 .figure-row img,
 .image-row img {
-  --origin: left center;
-  min-width: 0;
-  width: 100%;
+  max-width: 100%;
   height: auto;
-  cursor: zoom-in;
-  transition: transform 0.25s ease;
-  transform-origin: var(--origin);
-  position: relative;
-  z-index: 10;
-  object-fit: cover;
+  cursor: pointer;
+  object-fit: contain;
 }
 
 .docs-image-row {
   display: flex;
   gap: 8px;
   width: 100%;
+  margin-top: 1rem;
+  align-items: flex-start;
 }
 
 .docs-image-row .docs-image {
   flex: 1 1 0;
-  width: 0;
-  max-width: 100%;
+  min-width: 0;
+  width: 100%;
   height: auto;
   object-fit: contain;
-  transform-origin: left top;   /* anchor growth to top-left corner */
-  transition: transform 0.2s ease;
-}
-
-.docs-image-row .docs-image:last-child {
-  transform-origin: right top;
-}
-
-/* 📱 Smaller screenshots — zoom more */
-.docs-image.is-zoomed {
-  --zoom: 2;
-  --zoom-max: 2;
-  transform: scale(min(var(--zoom), var(--zoom-max)));
-  cursor: zoom-out;
-  z-index: 1000;
-}
-
-/* 📱 Narrow devices (phones, iPad Mini portrait) — hard cap zoom, even if --zoom is set inline on the <img> */
-@media (max-width: 768px) {
-  .docs-image.is-zoomed {
-    --zoom-max: 1.5;
-  }
-}
-
-/* 🖥️ On larger screens, zoom these images in a bit further (kept modest since they're portrait) */
-@media (min-width: 900px) {
-  .docs-image.is-zoomed {
-    --zoom-max: 4.0;
-  }
 }
 
 .docs-toc .docs-image {
-  max-width: 70%;
-}
-
-/* 🖥️ Larger device mockups — zoom less */
-.image-row img.is-zoomed {
-  --zoom: 4.0;
-  --zoom-boost: 1;
-  transform: scale(calc(var(--zoom) * var(--zoom-boost)));
-  cursor: zoom-out;
-  z-index: 1000;
-}
-
-.figure-row img.is-zoomed {
-  --zoom: 4.0;
-  --zoom-boost: 1;
-  transform: scale(calc(var(--zoom) * var(--zoom-boost)));
-  cursor: zoom-out;
-  z-index: 1000;
-}
-
-/* Last image grows leftward instead of rightward when zoomed,
-   so it doesn't zoom off the right edge of the display */
-.figure-row figure:last-child img {
-  --origin: right center;
-}
-
-/* Second-to-last image grows from its own center, staying put either direction */
-.figure-row figure:nth-last-child(2) img {
-  --origin: center;
-}
-
-/* 📱 Narrow screens — zoom these further, on top of whatever --zoom each image already has */
-@media (max-width: 768px) {
-  .image-row img.is-zoomed,
-  .figure-row img.is-zoomed {
-    --zoom-boost: 2.0;
-  }
+  max-width: 100%;
 }
 
 code {
@@ -293,6 +232,7 @@ code {
 /* ---------- Footer ---------- */
 
 footer {
+  margin-top: auto;
   border-top: 1px solid var(--border);
   padding: 2rem 1.5rem;
   text-align: center;
@@ -324,25 +264,19 @@ footer {
   .video-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
 }
 
 @media (prefers-color-scheme:dark) {
-  body {
-    /* optional: topo map background tweaks for dark mode */
-    /* background-color: #222; */ /* if you want topo background darkened */
-  }
-
   .docs-content,
   .card {
-    background: #1a1a1a;   /* or a dark translucent panel */
-    border-color: #444;     /* darker border for contrast */
-    color: #eee;            /* readable text */
+    background: #1a1a1a;
+    border-color: #444;
+    color: #eee;
   }
 
   .docs-content p,
   .card p {
-    color: #ccc;               /* slightly softer for readability */
+    color: #ccc;
   }
 }
 
@@ -350,7 +284,7 @@ footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 0.30rem;          /* controls space between image and text */
+  gap: 0.30rem;
   line-height: 1;
 
   padding: 0.4rem 0.4rem;
@@ -366,7 +300,7 @@ footer {
 }
 
 .button img {
-  width: 120px;          /* larger badge */
+  width: 120px;
   height: auto;
   display: block;
 }
@@ -420,7 +354,7 @@ footer {
   gap: 1.5rem;
 
   width: 100%;
-  max-width: 600px;   /* desktop can breathe */
+  max-width: 600px;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -443,10 +377,6 @@ footer {
   border-radius: 8px;
 }
 
-/* While playing, the frame leaves normal flow so growing it doesn't push
-   sibling tiles around — it just overlays on top, anchored to the same
-   corner it started in. Width/height are set directly by JS (video.js),
-   not by aspect-ratio, to avoid relying on that property inside a grid. */
 .video-tile.is-playing .video-frame {
   position: absolute;
   top: 0;
@@ -481,23 +411,18 @@ video:fullscreen {
 }
 
 .figure-row {
-  display: flex;          /* Activates Flexbox layout */
+  display: flex;
   align-items: flex-start;
-  flex-direction: row;    /* Aligns items horizontally */
-  gap: 10px;              /* Adds physical space between items */
-  justify-content: center;/* Centers the row items on the page */
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
   margin-top: 2rem;
 }
 
-/* Styling the individual figure cards */
-.figure-row figure {
-  margin: 0;              /* Removes browser default figure margins */
-  text-align: center;     /* Centers the text caption under the image */
-}
-
+.figure-row figure,
 figure {
-  margin: 0;              /* Removes browser default figure margins */
-  text-align: center;     /* Centers the text caption under the image */
+  margin: 0;
+  text-align: center;
 }
 
 figcaption {
