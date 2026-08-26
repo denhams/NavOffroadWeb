@@ -215,7 +215,7 @@ main {
   min-width: 0;
   width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: scale-down; /* ???? */
 }
 
 .docs-toc .docs-image {
@@ -259,6 +259,16 @@ footer {
 
   .docs-content {
     padding: 1.75rem 1.5rem;
+  }
+
+  .docs-image-row {
+    max-width: 200px; /* Adjust this value (e.g., 180px - 240px) to your taste */
+    margin: 1rem auto 0; /* Centers the image row */
+  }
+
+  .docs-toc .docs-image {
+    max-width: 100%;
+    height: auto;
   }
 
   .video-grid {
