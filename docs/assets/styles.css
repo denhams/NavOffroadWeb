@@ -215,11 +215,15 @@ main {
   min-width: 0;
   width: 100%;
   height: auto;
-  object-fit: scale-down; /* ???? */
+  object-fit: scale-down;
 }
 
 .docs-toc .docs-image {
   max-width: 100%;
+}
+
+.bp-wrap {
+  z-index: 1001 !important;
 }
 
 code {
