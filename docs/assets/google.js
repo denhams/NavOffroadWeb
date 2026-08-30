@@ -5,11 +5,17 @@ gtag('js', new Date());
 gtag('config', 'AW-16958382109');
 
 function gtag_report_app_store_click(url) {
+  var redirected = false;
+
   var callback = function () {
-    if (typeof url !== 'undefined') {
+    if (!redirected && typeof url !== 'undefined') {
+      redirected = true;
       window.location = url;
     }
   };
+
+  // Fallback redirect after 1 second if Google Analytics/Ads fails or is blocked
+  setTimeout(callback, 1000);
 
   gtag('event', 'conversion', {
     'send_to': 'AW-16958382109/p2cGCN-gs-gcEJ3AsZY_',
