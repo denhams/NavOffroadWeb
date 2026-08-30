@@ -441,23 +441,25 @@ figure {
 }
 
 figcaption {
-  margin-top: 0.5rem;
+  margin-top: 0.0rem;
   font-size: 0.85rem;
   color: #555;
 }
 
-.small  { width: 50% !important; }
-.medium-small { width: 60% !important; }
-.medium { width: 80% !important; }
-.large  { width: 100% !important; }
+.figure-row figure.small { width: 8%; }
+.figure-row figure.medium-small { width: 12%; }
+.figure-row figure.medium { width: 20%; }
+.figure-row figure.large { width: 35%; }
 
 @media (max-width: 768px) {
-    .image-row {
-        gap: 15px;
-    }
-
-    .small  { width: 20%; }
-    .medium-small { width: 22%; }
-    .medium { width: 23%; }
-    .large  { width: 27%; }
+  .image-row {
+    gap: 15px;
+  }
+  .figure-row {
+    gap: 25px;
+  }
+  .figure-row figure {
+    text-align: center;
+    width: 100%; /* Allows flex items to shrink/grow evenly if needed */
+  }
 }
