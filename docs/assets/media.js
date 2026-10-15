@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const bp = BiggerPicture({ target: document.body });
 
+  // 1. Single images (excluding any inside a gallery-group container)
   document
-    .querySelectorAll(".docs-image, .image-row img, .figure-row img")
+    .querySelectorAll(".docs-image, .image-row img, .figure-row figure:not(:has(.gallery-group)) img")
     .forEach((img) => {
       img.addEventListener("click", (event) => {
         event.preventDefault();
@@ -19,15 +20,49 @@ document.addEventListener("DOMContentLoaded", () => {
             height: img.naturalHeight || 800,
             ...(caption ? { caption } : {})
           }],
-          // intro: "fade" disables the target morphing animation on both open and close
           intro: "fade",
-          maxZoom: 1, // Ensures tap opens, and the next tap closes cleanly
+          maxZoom: 1,
           closeOnImageClick: true,
           closeOnBackdropClick: true
         });
       });
     });
 
+  // 2. Multi-image carousel gallery group (iPhone Duo)
+  document.querySelectorAll('.gallery-group').forEach(el => {
+    el.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      bp.open({
+        items: [
+          {
+            img: el.getAttribute('data-img'),
+            thumb: el.getAttribute('data-img'),
+            alt: el.getAttribute('data-alt') || "",
+            width: parseInt(el.getAttribute('data-width'), 10) || 1419,
+            height: parseInt(el.getAttribute('data-height'), 10) || 2796,
+            caption: el.getAttribute('data-caption') || ""
+          },
+          {
+            img: el.getAttribute('data-img-2'),
+            thumb: el.getAttribute('data-img-2'),
+            alt: el.getAttribute('data-alt-2') || "",
+            width: parseInt(el.getAttribute('data-width-2'), 10) || 1574,
+            height: parseInt(el.getAttribute('data-height-2'), 10) || 2194,
+            caption: el.getAttribute('data-caption-2') || ""
+          }
+        ],
+        position: 0,
+        intro: "fade",
+        maxZoom: 1,
+        closeOnImageClick: true,
+        closeOnBackdropClick: true
+      });
+    });
+  });
+
+  // 3. Videos
   document.querySelectorAll(".video-tile video").forEach((video) => {
     video.addEventListener("click", (event) => {
       event.preventDefault();

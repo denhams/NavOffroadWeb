@@ -458,6 +458,17 @@ figcaption {
 .figure-row figure.medium { width: 20%; }
 .figure-row figure.large { width: 35%; }
 
+/* Desktop screens: position relative to the center image area */
+@media (min-width: 769px) {
+  .bp-wrap .bp-prev {
+    left: calc(50% - 370px) !important;
+  }
+
+  .bp-wrap .bp-next {
+    right: calc(50% - 370px) !important;
+  }
+}
+
 @media (max-width: 768px) {
   .image-row {
     gap: 15px;
