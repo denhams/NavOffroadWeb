@@ -74,3 +74,26 @@
 	  background-image: none;
 	  color: CanvasText;
 	}
+
+	.hero-section {
+	  display: flex;
+	  align-items: center;
+	  gap: 20px;
+	  margin-bottom: 20px;
+	}
+
+	.hero-text {
+	  flex: 1; /* Tells the text area to take up the remaining horizontal space */
+	  min-width: 0; /* Prevents text from forcing its way out of the container */
+	}
+
+	.hero-text p {
+	  margin-top: 0; /* Cleans up any default top spacing on the first paragraph */
+	}
+
+	@media (max-width: 374px) {
+	  .hero-section {
+	    flex-direction: column;
+	    align-items: flex-start;
+	  }
+	}
